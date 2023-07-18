@@ -1,0 +1,52 @@
+@use "../../templates/template";
+
+.form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    input{
+        background-color: #F3F3F3;
+        border: 0;
+        border-radius: 7px;
+        padding: 0 15px;
+        height: 45px;
+        width: 64%;
+    }
+    .primary_button{
+        background-color: template.$primary-color;
+        height: 45px;
+        width: 15%;
+        border: 0;
+        border-radius: 7px;
+        color: #FFF;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+    .secondary_button{
+        background-color: template.$text-gray-500;
+        height: 45px;
+        width: 15%;
+        border: 0;
+        border-radius: 7px;
+        color: #FFF;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+}
+
+@media (max-width: 426px) {
+    .form{
+        gap: 5px;
+        .primary_button, .secondary_button{
+            font-size: 12px;
+        }
+    }
+}

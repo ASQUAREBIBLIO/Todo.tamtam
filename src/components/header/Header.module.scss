@@ -1,0 +1,30 @@
+@use "../../templates/template";
+
+.nav_bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: template.$color-white;
+    padding: 27px 30px;
+    border-radius: 0 0 22px 22px;
+    .logo{
+        font-family: template.$font-family;
+        color: template.$primary-color;
+        font-size: 35px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        span{
+            color: template.$text-gray-500;
+        }
+    }
+}
+
+@media (max-width: 426px) {
+    .nav_bar{
+       padding: 20px;
+       .logo{
+        font-size: 25px;
+       }
+    }
+}

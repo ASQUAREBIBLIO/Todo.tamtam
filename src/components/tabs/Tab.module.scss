@@ -1,0 +1,41 @@
+@use "../../templates/template";
+
+.tab{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 12.6px;
+    margin: 0 0 10px 0;
+    gap: 15.75px;
+    background-color: template.$secondary-bg-color;
+    border-radius: 7.875px;
+    cursor: pointer;
+    span{
+        font-size: 16px;
+        color: template.$text-gray-500;
+    }
+    a{
+        color: template.$text-gray-500;
+        font-family: template.$font-family;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    &:hover{
+        background-color: rgb(#9333EA, 0.1);
+        span, a{
+            color: template.$primary-color;
+        }
+    }
+}
+
+.active {
+    background-color: rgb(#9333EA, 0.1);
+    span{
+        color: template.$primary-color;
+    }
+    a{
+        color: template.$primary-color;
+    }
+ }

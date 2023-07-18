@@ -1,0 +1,122 @@
+@use "../../templates/template";
+
+.main{
+    margin: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 30px 60px;
+    .aside{
+        position: relative;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        .copy_rights{
+            color: template.$text-gray-500;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        
+        }
+    }
+    .tasks{
+        width: 70%;
+        height: 635px;
+        background-color: template.$color-white;
+        border-radius: 12.661px;
+        flex-shrink: 0;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        column-gap: 20px;
+        &_container{
+            height: 90%;
+            overflow-y: scroll;
+        }
+        em{
+            color: template.$text-gray-500;
+            font-size: 12px;
+        }
+    }
+    .alert_success{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        position: absolute;
+        left: 20px;
+        top: 10px;
+        background-color: template.$color-white;
+        border-radius: 7px;
+        padding: 15px 20px;
+        color: template.$primary-color;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        animation: fade .3s;
+        span{
+            color: template.$color-white;
+            background-color: template.$primary-color;
+            padding: 7px;
+            border-radius: 50%;
+        }
+        p{
+            color: template.$text-gray-500;
+            font-size: 14px;
+        }
+        &::before{
+            content: "";
+            position: absolute;
+            z-index: 2;
+            left: -15px;
+            width: 0; 
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent; 
+            border-right: 15px solid rgb(255, 255, 255); 
+            // box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        }
+        i{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 16px;
+            color: template.$text-gray-500;
+        }
+
+    }
+}
+
+@keyframes fade {
+    0%{left: -100px;}
+    100%{left: 20px;}
+}
+
+@media (max-width: 768px) {
+    .main{
+        padding: 30px;
+    }
+}
+
+@media (max-width: 426px) {
+    .main{
+        flex-wrap: wrap;
+        padding: 20px;
+        .aside{
+            width: 100%;
+            > div{
+                display: flex;
+                justify-content:center;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+        .tasks{
+            width: 100%;
+            height: 500px;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+@use "./templates/template";
+::-webkit-scrollbar {
+    width: 3px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #F3F3F3;
+    border-radius: 5px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: template.$primary-color;
+    border-radius: 5px;
+  }
+
+
+*{
+    font-family: 'Roboto', sans-serif;
+    margin: 0; padding: 0;
+}
+.container{
+    background-color: #F3F3F3;
+    height: 100%;
+}

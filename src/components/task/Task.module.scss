@@ -1,0 +1,113 @@
+@use "../../templates/template";
+
+.task{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+    &_b{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        input{
+            accent-color: template.$primary-color;
+            cursor: pointer;
+        }
+        &_info{
+            display: flex;
+            flex-direction: column;
+            p{
+                color: template.$text-neutral-700;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                span{
+                    color: template.$text-gray-500;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                }
+            }
+            
+        }
+    }
+    div {
+        .show_dialog{
+            cursor: pointer;
+            &:hover{
+                color: red;transition: ease-in-out .2s;
+            }
+        }
+
+    }
+    
+    .backdrop{
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        width: 100%;
+        background-color: #0000001b;
+    }
+    .delete_dialog{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        column-gap: 20px;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        height: 250px;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        background-color: #fff;
+        .dialog_icon{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: #fff;
+        }
+        .dialog_head{
+            background-color: red;
+            border-radius: 7px 7px 0 0;
+            width: 100%;
+            padding: 20px 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .action_btn{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            .hide_button{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                background-color: template.$text-neutral-700;
+                border-radius: 7px;
+                padding: 10px 15px;
+                color: #fff;
+                cursor: pointer;
+            }
+            .delete_button{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                background-color: red;
+                border-radius: 7px;
+                padding: 10px 15px;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+    }
+}
