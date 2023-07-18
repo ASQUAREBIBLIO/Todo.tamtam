@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Tab from "../tabs/tab";
 import styles from "./Main.module.scss";
 import Task from "../task/task";
 import axios from "axios";
 import Form from "../form/Form";
+import TabItem from "../tabs/tab";
 
 const menu = [
   {
@@ -142,7 +142,7 @@ const Aside = () => {
       <div className={styles.aside}>
         <div>
           {menu.map((tab) => (
-            <Tab
+            <TabItem
               key={tab.id}
               id={tab.id}
               icon={tab.icon}

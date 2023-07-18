@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Tab.module.scss";
 
-const Tab = ({ id, icon, title, index, handleOnClick }) => {
+const TabItem = ({ id, icon, title, index, handleOnClick }) => {
   return (
     <div
       onClick={handleOnClick}
@@ -13,4 +13,4 @@ const Tab = ({ id, icon, title, index, handleOnClick }) => {
   );
 };
 
-export default Tab;
+export default TabItem;
