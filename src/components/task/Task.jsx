@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Task.module.scss";
+import { FadeLoader } from "react-spinners";
+import { Modal } from "../alerts/Alerts";
 
 const Task = ({
   title,
@@ -8,25 +10,26 @@ const Task = ({
   handleOnChange,
   handleOnDelete,
   handleOnHide,
+  loading,
 }) => {
   const [isDelete, setIsDelete] = useState(false);
-  const checkDate = () => {
-    if (date == new Date()) date = "Today";
-    checkDate();
-  };
 
   return (
     <div className={styles.task}>
       <div className={styles.task_b}>
-        <input
-          type="checkbox"
-          defaultChecked={isDone}
-          onChange={handleOnChange}
-        />
+        {loading ? (
+          <FadeLoader color="#9333EA" height={5} width={1} margin={-11} />
+        ) : (
+          <input
+            type="checkbox"
+            defaultChecked={isDone}
+            onChange={handleOnChange}
+          />
+        )}
 
         <div className={styles.task_b_info}>
           <p>
-            {title} <br /> <span>{`${date}`}</span>
+            {title} <br /> <span>{date}</span>
           </p>
         </div>
       </div>
@@ -39,30 +42,11 @@ const Task = ({
         </abbr>
       </div>
       {isDelete && (
-        <>
-          <div className={styles.backdrop}></div>
-          <div className={styles.delete_dialog}>
-            <span
-              className={`bi bi-x-circle ${styles.dialog_icon}`}
-              onClick={() => setIsDelete((prev) => false)}
-            />
-            <span className={styles.dialog_head}>Delete task</span>
-            <div>
-              <strong>Are you sure ?</strong>
-              <p>This cannot be undone.</p>
-            </div>
-            <div className={styles.action_btn}>
-              <div className={styles.hide_button} onClick={handleOnHide}>
-                <span className={`bi bi-eye-slash-fill`} />
-                <span>Delete</span>
-              </div>
-              <div className={styles.delete_button} onClick={handleOnDelete}>
-                <span className={`bi bi-trash-fill`} />
-                <span>Delete permanentaly</span>
-              </div>
-            </div>
-          </div>
-        </>
+        <Modal
+          handleOnClick={() => setIsDelete((prev) => false)}
+          handleOnDelete={handleOnDelete}
+          handleOnHide={handleOnHide}
+        />
       )}
     </div>
   );

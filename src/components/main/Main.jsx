@@ -3,41 +3,25 @@ import styles from "./Main.module.scss";
 import Task from "../task/task";
 import axios from "axios";
 import Form from "../form/Form";
-import TabItem from "../tabs/tab";
+import Aside from "../aside/Aside";
+import { Alerts } from "../alerts/Alerts";
+import { formatDate } from "../../utils/Utils";
+import { FadeLoader } from "react-spinners";
 
-const menu = [
-  {
-    id: 1,
-    title: "All",
-    icon: "bi bi-calendar",
-  },
-  {
-    id: 2,
-    title: "Todo",
-    icon: "bi bi-calendar-plus",
-  },
-  {
-    id: 3,
-    title: "Done",
-    icon: "bi bi-calendar-check",
-  },
-];
-
-const Aside = () => {
-  const [data, setData] = useState([]);
+const Main = () => {
+  const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
-  const [isDone, setIsDone] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
   const [isCreated, setIsCreated] = useState(false);
   const [active, setActive] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [inputLoader, setInputLoader] = useState(false);
 
-  useEffect(
-    (title) => {
-      fetchData(title);
-    },
-    [isSubmitted]
-  );
+  useEffect(() => {
+    if (active === 1) fetchAllTask();
+    else if (active === 2) fetchTodoTasks();
+    else if (active === 3) fetchDoneTasks();
+  }, [active]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -47,61 +31,82 @@ const Aside = () => {
   });
 
   // Fetch the tasks
-  const fetchData = (title) => {
+  const fetchAllTask = () => {
+    // console.log("All task");
     // All tasks
+    setLoading(true);
     axios
       .get("http://localhost:3030/tasks?isDeleted=false")
-      .then((response) => setData(response.data))
+      .then((response) => {
+        setTasks(response.data);
+        setLoading(false);
+      })
       .catch((error) => console.log(error));
+  };
 
-    // Unchecked tasks
-    if (title == "Todo") {
-      axios
-        .get(`http://localhost:3030/tasks?isDone=false&isDeleted=false`)
-        .then((response) => setData(response.data))
-        .catch((error) => console.log(error));
-    }
+  const fetchTodoTasks = () => {
+    // console.log("Todo tasks");
+    setLoading(true);
+    axios
+      .get(`http://localhost:3030/tasks?isDone=false&isDeleted=false`)
+      .then((response) => {
+        setTasks(response.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  };
 
-    // Done tasks
-    if (title == "Done") {
-      axios
-        .get(`http://localhost:3030/tasks?isDone=true&isDeleted=false`)
-        .then((response) => setData(response.data))
-        .catch((error) => console.log(error));
-    }
+  const fetchDoneTasks = () => {
+    // console.log("Done tasks");
+    setLoading(true);
+    axios
+      .get(`http://localhost:3030/tasks?isDone=true&isDeleted=false`)
+      .then((response) => {
+        setTasks(response.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
   };
 
   // Handle the adding of new tasks
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    let date =
-      new Date().toDateString() +
-      " " +
-      new Date().getHours() +
-      ":" +
-      new Date().getMinutes();
+    // console.log(e.target.value);
+
+    let date = formatDate();
+
+    const task = {
+      title,
+      date,
+      isDone: false,
+      isDeleted: false,
+    };
+
     axios
-      .post("http://localhost:3030/tasks", {
-        title,
-        date,
-        isDone,
-        isDeleted: false,
-      })
+      .post("http://localhost:3030/tasks", task)
       .then((response) => {
-        setIsSubmitted((prevIsSubmitted) => !prevIsSubmitted);
         setIsCreated((prevIsCreated) => !prevIsCreated);
+        setTasks((prevTasks) =>
+          active !== 3 ? [...prevTasks, task] : [...prevTasks]
+        );
       })
       .catch((error) => console.log(error));
   };
 
   // Handle check and uncheck of a task
   const handleOnChange = (task) => {
+    setInputLoader(true);
     axios
       .patch(`http://localhost:3030/tasks/${task.id}`, { isDone: !task.isDone })
       .then((response) => {
         setIsUpdated((prev) => !prev);
-        setIsSubmitted((prevIsSubmitted) => !prevIsSubmitted);
-        setActive((prev) => 1);
+        if (active === 2 || active === 3)
+          setTasks((prevTasks) =>
+            prevTasks.filter(
+              (item) => item.id !== task.id && item.isDone !== !task.isDone
+            )
+          );
+        setInputLoader(false);
       })
       .catch((error) => console.log(error));
   };
@@ -110,9 +115,7 @@ const Aside = () => {
   const handleOnDelete = (id) => {
     axios
       .delete(`http://localhost:3030/tasks/${id}`)
-      .then((response) => {
-        setIsSubmitted((prevIsSubmitted) => !prevIsSubmitted);
-      })
+      .then((response) => setTasks(tasks.filter((task) => task.id !== id)))
       .catch((error) => console.log(error));
   };
 
@@ -122,50 +125,28 @@ const Aside = () => {
       .patch(`http://localhost:3030/tasks/${task.id}`, {
         isDeleted: !task.isDeleted,
       })
-      .then((response) => {
-        setIsSubmitted((prevIsSubmitted) => !prevIsSubmitted);
-      })
+      .then((response) => setTasks(tasks.filter((task) => task.id !== task.id)))
       .catch((error) => console.log(error));
-  };
-
-  const handleOnActive = (index) => {
-    setActive((prevActive) => index);
   };
 
   const handleOnCancel = () => {
     setTitle((prev) => "");
   };
 
+  const handleOnActive = (index) => {
+    setActive((prevActive) => index);
+  };
+
   return (
     <div className={styles.main}>
       {/* Aside section - Tabs */}
-      <div className={styles.aside}>
-        <div>
-          {menu.map((tab) => (
-            <TabItem
-              key={tab.id}
-              id={tab.id}
-              icon={tab.icon}
-              title={tab.title}
-              index={active}
-              handleOnClick={() => {
-                fetchData(tab.title);
-                handleOnActive(tab.id);
-              }}
-            />
-          ))}
-        </div>
-        <p className={styles.copy_rights}>
-          <span className="bi bi-c-circle"></span>Tamtam international - Stage
-          2023
-        </p>
-      </div>
+      <Aside active={active} handleOnActive={handleOnActive} />
 
       {/* Main section - Tasks */}
       <div className={styles.tasks}>
-        {data.length > 0 ? (
+        {tasks.length > 0 && !loading ? (
           <div className={styles.tasks_container}>
-            {data.map((task) => (
+            {tasks.map((task) => (
               <Task
                 key={task.id}
                 title={task.title}
@@ -174,11 +155,18 @@ const Aside = () => {
                 handleOnChange={() => handleOnChange(task)}
                 handleOnDelete={() => handleOnDelete(task.id)}
                 handleOnHide={() => handleOnHide(task)}
+                loading={inputLoader}
               />
             ))}
           </div>
         ) : (
-          <em>No tasks.</em>
+          !loading && <em>No tasks added yet.</em>
+        )}
+
+        {loading && (
+          <div className={styles.loader}>
+            <FadeLoader color="#9333EA" />
+          </div>
         )}
 
         {/* Form - Add new task */}
@@ -191,34 +179,20 @@ const Aside = () => {
       </div>
 
       {isUpdated && (
-        <div className={styles.alert_success}>
-          <span className="bi bi-check2-square" />
-          <div>
-            <strong>Success</strong>
-            <p>Your changes has been saved.</p>
-          </div>
-          <i
-            className="bi bi-x"
-            onClick={() => setIsUpdated((prev) => false)}
-          />
-        </div>
+        <Alerts
+          message="Your changes has been saved."
+          handleOnClick={() => setIsUpdated((prev) => false)}
+        />
       )}
 
       {isCreated && (
-        <div className={styles.alert_success}>
-          <span className="bi bi-check2-square" />
-          <div>
-            <strong>Success</strong>
-            <p>New task has been added.</p>
-          </div>
-          <i
-            className="bi bi-x"
-            onClick={() => setIsCreated((prev) => false)}
-          />
-        </div>
+        <Alerts
+          message="New task has been added."
+          handleOnClick={() => setIsCreated((prev) => false)}
+        />
       )}
     </div>
   );
 };
 
-export default Aside;
+export default Main;
