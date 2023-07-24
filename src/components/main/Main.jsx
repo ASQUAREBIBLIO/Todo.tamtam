@@ -71,11 +71,13 @@ const Main = () => {
   // Handle the adding of new tasks
   const handleOnSubmit = (e) => {
     e.preventDefault();
+
     // console.log(e.target.value);
 
     let date = formatDate();
 
     const task = {
+      id: Math.floor(Math.random() * 10000),
       title,
       date,
       isDone: false,
@@ -106,6 +108,12 @@ const Main = () => {
               (item) => item.id !== task.id && item.isDone !== !task.isDone
             )
           );
+        else
+          setTasks((prevTasks) =>
+            prevTasks.map((item) =>
+              item.id === task.id ? { ...item, isDone: !task.isDone } : item
+            )
+          );
         setInputLoader(false);
       })
       .catch((error) => console.log(error));
@@ -125,7 +133,13 @@ const Main = () => {
       .patch(`http://localhost:3030/tasks/${task.id}`, {
         isDeleted: !task.isDeleted,
       })
-      .then((response) => setTasks(tasks.filter((task) => task.id !== task.id)))
+      .then((response) =>
+        setTasks((prevTasks) =>
+          prevTasks.filter(
+            (item) => item.id !== task.id && item.isDeleted !== !task.isDeleted
+          )
+        )
+      )
       .catch((error) => console.log(error));
   };
 
@@ -135,6 +149,15 @@ const Main = () => {
 
   const handleOnActive = (index) => {
     setActive((prevActive) => index);
+  };
+
+  const validateForm = (newTask) => {
+    tasks.filter(
+      (task) =>
+        task.date === newTask.date &&
+        task.title === newTask.title &&
+        alert("duplicate tasks")
+    );
   };
 
   return (

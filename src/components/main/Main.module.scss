@@ -1,14 +1,14 @@
 @use "../../templates/template";
 
-.main{
+.main {
     margin: auto;
     position: relative;
     display: flex;
     justify-content: center;
     gap: 15px;
     padding: 30px 60px;
-    
-    .tasks{
+
+    .tasks {
         position: relative;
         width: 70%;
         height: 615px;
@@ -20,11 +20,13 @@
         flex-direction: column;
         justify-content: space-between;
         column-gap: 20px;
-        &_container{
+
+        &_container {
             height: 90%;
             overflow-y: scroll;
         }
-        em{
+
+        em {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -32,7 +34,8 @@
             color: template.$text-gray-500;
             font-size: 12px;
         }
-        .loader{
+
+        .loader {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -42,30 +45,38 @@
 }
 
 @keyframes fade {
-    0%{left: -100px;}
-    100%{left: 20px;}
+    0% {
+        left: -100px;
+    }
+
+    100% {
+        left: 20px;
+    }
 }
 
 @media (max-width: 768px) {
-    .main{
+    .main {
         padding: 30px;
     }
 }
 
 @media (max-width: 426px) {
-    .main{
+    .main {
         flex-wrap: wrap;
         padding: 20px;
-        .aside{
+
+        .aside {
             width: 100%;
-            > div{
+
+            >div {
                 display: flex;
-                justify-content:center;
+                justify-content: center;
                 align-items: center;
                 gap: 10px;
             }
         }
-        .tasks{
+
+        .tasks {
             width: 100%;
             height: 500px;
         }

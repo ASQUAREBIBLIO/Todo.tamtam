@@ -18,7 +18,9 @@ const Task = ({
     <div className={styles.task}>
       <div className={styles.task_b}>
         {loading ? (
-          <FadeLoader color="#9333EA" height={5} width={1} margin={-11} />
+          <div>
+            <FadeLoader color="#9333EA" height={5} width={2} margin={-11} />
+          </div>
         ) : (
           <input
             type="checkbox"

@@ -1,32 +1,3 @@
 {
-  "tasks": [
-    {
-      "title": "task 1",
-      "date": "Today at 15:28",
-      "isDone": false,
-      "isDeleted": false,
-      "id": 1
-    },
-    {
-      "title": "task 2",
-      "date": "Today at 15:28",
-      "isDone": true,
-      "isDeleted": false,
-      "id": 2
-    },
-    {
-      "title": "task 3",
-      "date": "Today at 15:28",
-      "isDone": true,
-      "isDeleted": false,
-      "id": 3
-    },
-    {
-      "title": "task 4",
-      "date": "Today at 15:29",
-      "isDone": true,
-      "isDeleted": false,
-      "id": 4
-    }
-  ]
+  "tasks": []
 }

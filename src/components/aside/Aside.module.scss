@@ -57,3 +57,17 @@
      }
 }
 
+@media (max-width: 426px) {
+    
+    .aside{
+        width: 100%;
+        > div{
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+}
+
+

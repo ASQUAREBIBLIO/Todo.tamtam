@@ -8,7 +8,11 @@ const formatDate = () => {
     ":" +
     new Date().getMinutes();
 
+  let createdAt;
+
   if (`${date.split(" ")[0]}` == new Date().toDateString().split(" ")[0])
-    return `Today at ${date.split(" ")[4]}`;
-  else return `${date.split(" ")[0]} at ${date.split(" ")[4]}`;
+    createdAt = `Today at ${date.split(" ")[4]}`;
+  else createdAt = `${date.split(" ")[0]} at ${date.split(" ")[4]}`;
+
+  return createdAt;
 };

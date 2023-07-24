@@ -12,7 +12,7 @@ function App() {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-  });
+  }, []);
   return (
     <React.Fragment>
       {loading ? (
