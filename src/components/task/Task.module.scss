@@ -1,29 +1,35 @@
 @use "../../templates/template";
 
 
-.task{
+.task {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 7px;
-    &_b{
+
+    &_b {
         display: flex;
         align-items: center;
         gap: 20px;
-        input{
+
+        input {
             accent-color: template.$primary-color;
             cursor: pointer;
         }
-        &_info{
+
+
+        &_info {
             display: flex;
             flex-direction: column;
-            p{
+
+            p {
                 color: template.$text-neutral-700;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 600;
                 line-height: normal;
-                span{
+
+                span {
                     color: template.$text-gray-500;
                     font-size: 14px;
                     font-style: normal;
@@ -31,14 +37,17 @@
                     line-height: normal;
                 }
             }
-            
+
         }
     }
+
     div {
-        .show_dialog{
+        .show_dialog {
             cursor: pointer;
-            &:hover{
-                color: red;transition: ease-in-out .2s;
+
+            &:hover {
+                color: red;
+                transition: ease-in-out .2s;
             }
         }
 

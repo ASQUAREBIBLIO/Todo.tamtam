@@ -1,6 +1,6 @@
 @use "../../templates/template";
 
-@mixin button($bg-color, $cursor){
+@mixin button($bg-color, $cursor) {
     background-color: $bg-color;
     height: 45px;
     width: 15%;
@@ -15,17 +15,18 @@
     cursor: $cursor;
 }
 
-.form{
+.form {
     position: absolute;
     bottom: 10px;
     right: 0;
     left: 0;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    input{
+    padding: 0 10px;
+
+    input {
         background-color: #F3F3F3;
         border: 0;
         border-radius: 7px;
@@ -33,21 +34,26 @@
         height: 45px;
         width: 64%;
     }
-    .disabled_button{
+
+    .disabled_button {
         @include button(gray, not-allowed);
     }
-    .primary_button{
+
+    .primary_button {
         @include button(template.$primary-color, pointer)
     }
-    .secondary_button{
+
+    .secondary_button {
         @include button(template.$text-gray-500, pointer)
     }
 }
 
 @media (max-width: 426px) {
-    .form{
+    .form {
         gap: 5px;
-        .primary_button, .secondary_button{
+
+        .primary_button,
+        .secondary_button {
             font-size: 12px;
         }
     }

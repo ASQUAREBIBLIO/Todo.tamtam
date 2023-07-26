@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FadeLoader } from "react-spinners";
+import { ClipLoader, FadeLoader } from "react-spinners";
 import "./App.scss";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import Header from "./components/header/Header";
@@ -17,7 +17,7 @@ function App() {
     <React.Fragment>
       {loading ? (
         <div className="loader">
-          <FadeLoader color="#9333EA" />
+          <ClipLoader size={30} color="#9333EA" />
         </div>
       ) : (
         <div className="container">

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Task.module.scss";
-import { FadeLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 import { Modal } from "../alerts/Alerts";
 
 const Task = ({
+  id,
   title,
   date,
   isDone,
@@ -17,9 +18,9 @@ const Task = ({
   return (
     <div className={styles.task}>
       <div className={styles.task_b}>
-        {loading ? (
-          <div>
-            <FadeLoader color="#9333EA" height={5} width={2} margin={-11} />
+        {loading === id ? (
+          <div className={styles.input_loader}>
+            <ClipLoader color="#9333EA" size={15} />
           </div>
         ) : (
           <input

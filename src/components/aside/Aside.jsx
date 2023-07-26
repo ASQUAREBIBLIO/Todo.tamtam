@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Aside.module.scss";
 import { tabs } from "../../../Data/Data";
+import { IconContext } from "react-icons";
 
 const Aside = ({ active, handleOnActive }) => {
   const handleOnClick = (index) => {
@@ -18,7 +19,11 @@ const Aside = ({ active, handleOnActive }) => {
             }}
             className={`${styles.tab} ${active === tab.id && styles.active}`}
           >
-            <span className={tab.icon}></span>
+            <IconContext.Provider
+              value={{ color: `${active === tab.id ? "#9333EA" : "#6B7280"}` }}
+            >
+              {tab.icon}
+            </IconContext.Provider>
             <a>{tab.title}</a>
           </div>
         ))}

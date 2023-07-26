@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Main.module.scss";
-import Task from "../task/task";
+import Task from "../task/Task";
 import axios from "axios";
 import Form from "../form/Form";
 import Aside from "../aside/Aside";
+import uuid from "react-uuid";
 import { Alerts } from "../alerts/Alerts";
 import { formatDate } from "../../utils/Utils";
-import { FadeLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 
 const Main = () => {
   const [tasks, setTasks] = useState([]);
@@ -15,7 +16,7 @@ const Main = () => {
   const [isCreated, setIsCreated] = useState(false);
   const [active, setActive] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [inputLoader, setInputLoader] = useState(false);
+  const [inputLoader, setInputLoader] = useState(0);
 
   useEffect(() => {
     if (active === 1) fetchAllTask();
@@ -77,7 +78,7 @@ const Main = () => {
     let date = formatDate();
 
     const task = {
-      id: Math.floor(Math.random() * 10000),
+      id: uuid(),
       title,
       date,
       isDone: false,
@@ -92,12 +93,13 @@ const Main = () => {
           active !== 3 ? [...prevTasks, task] : [...prevTasks]
         );
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => setTitle(""));
   };
 
   // Handle check and uncheck of a task
   const handleOnChange = (task) => {
-    setInputLoader(true);
+    setInputLoader(task.id);
     axios
       .patch(`http://localhost:3030/tasks/${task.id}`, { isDone: !task.isDone })
       .then((response) => {
@@ -114,7 +116,7 @@ const Main = () => {
               item.id === task.id ? { ...item, isDone: !task.isDone } : item
             )
           );
-        setInputLoader(false);
+        setInputLoader(0);
       })
       .catch((error) => console.log(error));
   };
@@ -172,6 +174,7 @@ const Main = () => {
             {tasks.map((task) => (
               <Task
                 key={task.id}
+                id={task.id}
                 title={task.title}
                 date={task.date}
                 isDone={task.isDone}
@@ -183,12 +186,12 @@ const Main = () => {
             ))}
           </div>
         ) : (
-          !loading && <em>No tasks added yet.</em>
+          !loading && <em>The list is empty! Add some tasks.</em>
         )}
 
         {loading && (
           <div className={styles.loader}>
-            <FadeLoader color="#9333EA" />
+            <ClipLoader size={30} color="#9333EA" />
           </div>
         )}
 

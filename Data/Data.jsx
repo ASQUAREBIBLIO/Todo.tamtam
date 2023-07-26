@@ -1,19 +1,21 @@
+import { FaCalendarAlt, FaCalendarPlus, FaCalendarCheck } from "react-icons/fa";
+
 export { tabs };
 
 const tabs = [
   {
     id: 1,
     title: "All",
-    icon: "bi bi-calendar",
+    icon: <FaCalendarAlt />,
   },
   {
     id: 2,
     title: "Todo",
-    icon: "bi bi-calendar-plus",
+    icon: <FaCalendarPlus />,
   },
   {
     id: 3,
     title: "Done",
-    icon: "bi bi-calendar-check",
+    icon: <FaCalendarCheck />,
   },
 ];

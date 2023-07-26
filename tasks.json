@@ -1,3 +1,81 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "714719f5-b2ba-0733-0a06-5ea278368386",
+      "title": "task 1",
+      "date": "Today at 14:9",
+      "isDone": true,
+      "isDeleted": false
+    },
+    {
+      "id": "d66b6e2c-5065-8653-f791-db578574b25a",
+      "title": "task 2",
+      "date": "Today at 14:15",
+      "isDone": false,
+      "isDeleted": false
+    },
+    {
+      "id": "bf782cbc-60aa-c3b5-5158-09fdf8a43704",
+      "title": "task 15",
+      "date": "Today at 14:51",
+      "isDone": true,
+      "isDeleted": false
+    },
+    {
+      "id": "e702821c-999b-f26c-f0e2-0f05117666f1",
+      "title": "task 2",
+      "date": "Today at 17:18",
+      "isDone": true,
+      "isDeleted": false
+    },
+    {
+      "id": "a5a5d1ee-7e02-fbd8-248b-00b1ea842cd2",
+      "title": "task3",
+      "date": "Today at 17:18",
+      "isDone": true,
+      "isDeleted": false
+    },
+    {
+      "id": "5ac25914-6447-df79-5f5b-1c393ec21429",
+      "title": "task 1",
+      "date": "Today at 17:18",
+      "isDone": false,
+      "isDeleted": false
+    },
+    {
+      "id": "34d7d196-c07e-5cfa-eb8e-4695811c3d17",
+      "title": "task 1",
+      "date": "Today at 17:18",
+      "isDone": false,
+      "isDeleted": false
+    },
+    {
+      "id": "70a22436-0437-1fed-917d-f63dc2ab1e84",
+      "title": "task3",
+      "date": "Today at 17:18",
+      "isDone": true,
+      "isDeleted": false
+    },
+    {
+      "id": "fa6b4e9f-cfd5-db46-5260-500903dcd2f3",
+      "title": "task 1",
+      "date": "Today at 17:18",
+      "isDone": false,
+      "isDeleted": false
+    },
+    {
+      "id": "5da1e536-1686-5bba-a5c0-0343801aed16",
+      "title": "task3",
+      "date": "Today at 17:18",
+      "isDone": true,
+      "isDeleted": false
+    },
+    {
+      "id": "8013acc2-79e9-fa94-8313-9bae9c3af153",
+      "title": "task3",
+      "date": "Today at 17:18",
+      "isDone": false,
+      "isDeleted": false
+    }
+  ]
 }
